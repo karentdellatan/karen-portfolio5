@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Dellatan, Content Operations Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F5F0;
+    --paper-2: #EFECE2;
+    --ink: #171717;
+    --ink-soft: #6B675F;
+    --line: rgba(23,23,23,0.14);
+    --line-dark: rgba(247,245,240,0.14);
+    --coral: #FF4F3D;
+    --cobalt: #315CFF;
+    --butter: #E8A800;
+    --paper-text: #F7F5F0;
+    --paper-text-soft: rgba(247,245,240,0.72);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --radius: 3px;
+    --ease: cubic-bezier(0.4,0,0.2,1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height: 1.65; }
+  h1, h2, h3 { font-family: var(--font-display); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+  img { display: block; max-width: 100%; }
+
+  /* Nav */
+  nav.topnav { position: sticky; top: 0; z-index: 60; background: var(--ink); }
+  nav.topnav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--font-mono); font-weight: 700; font-size: 14px; color: var(--paper); letter-spacing: 0.06em; }
+  .navlinks { display: flex; align-items: center; gap: 30px; }
+  .navlinks a.navlink {
+    position: relative; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--paper-text-soft); transition: color .2s var(--ease); padding-bottom: 4px;
+  }
+  .navlinks a.navlink::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--coral);
+    transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
+  }
+  .navlinks a.navlink:hover, .navlinks a.navlink.active { color: var(--paper); }
+  .navlinks a.navlink:hover::after, .navlinks a.navlink.active::after { transform: scaleX(1); }
+  .navlinks a.btn { text-transform: uppercase; }
+  .navlinks a.btn::after { display: none; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { width: 20px; height: 2px; background: var(--paper); transition: transform .2s var(--ease), opacity .2s var(--ease); }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: var(--radius); font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; transition: background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease); }
+  .btn-solid { background: var(--coral); color: var(--ink); }
+  .btn-solid:hover { background: var(--ink); color: var(--coral); }
+  .btn-dark { background: transparent; color: var(--paper); border: 1px solid rgba(247,245,240,0.3); }
+  .btn-dark:hover { background: var(--paper); color: var(--ink); }
+  .btn-outline { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); }
+  nav.topnav .btn { padding: 8px 16px; font-size: 11px; }
+
+  /* Hero */
+  header.hero { background: var(--paper); padding: 56px 0 80px; }
+  .hero-inner { display: block; }
+  .status-stamp { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); border: 1px solid var(--coral); padding: 7px 13px; transform: rotate(-2deg); margin-bottom: 30px; }
+
+  header.hero h1 { font-size: clamp(2.9rem, 9vw, 7.2rem); font-weight: 600; color: var(--ink); line-height: 0.94; letter-spacing: -0.02em; margin-bottom: 26px; }
+  .role-line { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 18px; }
+  .tagline { font-size: 16.5px; color: var(--ink); max-width: 520px; margin-bottom: 32px; line-height: 1.6; }
+
+  .pipeline-stepper { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 38px; }
+  .pipeline-stepper .arrow { color: var(--line); }
+  .pipeline-stepper .stage-active { color: var(--cobalt); font-weight: 700; border-bottom: 1px solid var(--cobalt); padding-bottom: 2px; }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* Hero portrait, editorial figure */
+  .hero-portrait { margin: 40px auto 0; max-width: 260px; }
+  .hero-portrait .photo-shell { border: 1px solid var(--ink); aspect-ratio: 3/4; overflow: hidden; background: var(--paper-2); position: relative; width: 100%; }
+  .hero-portrait .photo-shell img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(30%) contrast(1.05); }
+  .hero-portrait .photo-shell .fallback { width: 100%; height: 100%; display: none; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 40px; font-weight: 600; color: var(--ink); background: var(--paper-2); }
+  .hero-portrait figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero-portrait .fig-tag { color: var(--coral); font-weight: 600; }
+  .hero-portrait .fig-name { color: var(--ink); font-weight: 600; }
+  .hero-portrait .fig-loc { color: var(--ink-soft); }
+  .portrait-note { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.03em; color: var(--coral); margin-top: 14px; transform: rotate(-1.2deg); }
+  .portrait-note .arrow { display: inline-block; margin-right: 6px; }
+
+  @media (min-width: 900px) {
+    .hero-inner { display: grid; grid-template-columns: 1fr clamp(240px, 32vw, 340px); column-gap: 56px; align-items: start; }
+    .hero-portrait { margin: 6px 0 0; max-width: none; }
+  }
+
+  /* Ledger / highlights */
+  #highlights { background: var(--paper-2); padding: 8px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ledger-row { display: flex; align-items: baseline; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--line); gap: 16px; flex-wrap: wrap; }
+  .ledger-row:last-child { border-bottom: none; }
+  .ledger-label { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-coral { background: var(--coral); }
+  .dot-cobalt { background: var(--cobalt); }
+  .dot-butter { background: var(--butter); }
+  .ledger-value { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.8rem); color: var(--ink); }
+  .ledger-value .unit { font-family: var(--font-mono); font-weight: 500; font-size: 0.48em; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-left: 8px; }
+
+  /* Isolated proof point */
+  #proofpoint { background: var(--ink); color: var(--paper); padding: 92px 0; text-align: center; }
+  .proofpoint-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral); margin-bottom: 22px; }
+  .proofpoint-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(4.4rem, 13vw, 9.5rem); line-height: 0.88; color: var(--paper); }
+  .proofpoint-caption { font-family: var(--font-body); font-size: 15px; color: var(--paper-text-soft); max-width: 480px; margin: 22px auto 0; }
+
+  /* Sections */
+  section { padding: 88px 0; }
+  .section-frame { }
+  .section-label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 24px; }
+  .section-label.on-dark { color: var(--paper-text-soft); }
+  @media (min-width: 900px) {
+    .section-frame { display: grid; grid-template-columns: 40px 1fr; column-gap: 28px; }
+    .section-label { writing-mode: vertical-rl; transform: rotate(180deg); align-self: start; margin-bottom: 0; }
+  }
+  h2.section-title { font-size: clamp(1.6rem, 2.8vw, 2.1rem); font-weight: 600; color: var(--ink); margin-bottom: 40px; }
+  #proof h2.section-title { color: var(--paper); }
+
+  /* About */
+  #about { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-lead { font-family: var(--font-display); font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--ink); max-width: 620px; margin-bottom: 30px; line-height: 1.4; }
+  .about-text p { font-size: 16px; color: var(--ink); margin-bottom: 22px; max-width: 620px; }
+  .about-text p:last-of-type { margin-bottom: 0; }
+  .annotated .note { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.03em; color: var(--coral); line-height: 1.5; margin: -6px 0 22px; }
+  .annotated .note .arrow { display: block; font-size: 16px; margin-bottom: 4px; }
+  @media (min-width: 900px) {
+    .annotated { display: grid; grid-template-columns: 1fr 190px; column-gap: 32px; }
+    .annotated .note { transform: rotate(-1.5deg); margin-top: 46px; }
+  }
+
+  /* What I Do, ledger list */
+  .do-list { max-width: 700px; }
+  .do-item { display: flex; gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .do-item:first-child { padding-top: 0; }
+  .do-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2.1rem); color: var(--line); width: 56px; flex-shrink: 0; }
+  .do-content h3 { font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--ink); margin-bottom: 6px; }
+  .do-content p { font-size: 14px; color: var(--ink-soft); }
+
+  /* Proof of work, case files */
+  #proof { background: var(--ink); color: var(--paper); }
+  .case { position: relative; overflow: hidden; border: 1px solid var(--line-dark); padding: 34px 30px; margin-bottom: 22px; }
+  .case-ghost { position: absolute; top: -14px; right: 16px; font-family: var(--font-display); font-weight: 700; font-size: clamp(5rem, 12vw, 8.5rem); color: rgba(247,245,240,0.06); line-height: 1; z-index: 0; pointer-events: none; user-select: none; }
+  .case-tag { display: inline-block; position: relative; z-index: 1; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); border: 1px solid var(--coral); padding: 4px 10px; transform: rotate(-2deg); margin-bottom: 16px; }
+  .case h3 { position: relative; z-index: 1; font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--paper); max-width: 540px; margin-bottom: 22px; }
+  .case-ledger { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 26px; margin-bottom: 24px; padding-bottom: 22px; border-bottom: 1px solid var(--line-dark); }
+  .case-ledger .li { display: flex; flex-direction: column; gap: 6px; }
+  .case-ledger .li .lab { display: flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(247,245,240,0.5); }
+  .case-ledger .li .val { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--paper); }
+  .case-block { position: relative; z-index: 1; margin-bottom: 16px; }
+  .case-block .k { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral); margin-bottom: 6px; }
+  .case-block p { font-size: 14.5px; color: var(--paper-text-soft); }
+  .verified { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cobalt); margin-top: 6px; }
+  .case-note { position: relative; z-index: 1; font-size: 12.5px; color: rgba(247,245,240,0.4); font-style: italic; margin-top: 8px; }
+
+  /* Skills */
+  #skills { background: var(--paper); }
+  .skills-group { margin-bottom: 30px; }
+  .skills-group h3 { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 16px; }
+  .skill-list { display: flex; flex-wrap: wrap; }
+  .skill-list span { font-size: 14px; color: var(--ink); padding-right: 14px; margin-right: 14px; margin-bottom: 8px; border-right: 1px solid var(--line); }
+  .skill-list span:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+
+  .testimonial-card { background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 44px; text-align: center; }
+  .testimonial-card .quote-mark { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--coral); line-height: 1; margin-bottom: 8px; }
+  .testimonial-card p { font-size: 15px; font-style: italic; color: var(--ink); max-width: 460px; margin: 0 auto; }
+
+  .resume-band { background: var(--ink); border-radius: var(--radius); padding: 40px 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; color: var(--paper); }
+  .resume-band h3 { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+  .resume-band p { font-size: 14.5px; color: var(--paper-text-soft); max-width: 380px; }
+
+  footer#contact { background: var(--ink); color: var(--paper); padding: 100px 0 52px; text-align: center; }
+  footer h2 { font-size: clamp(2rem, 4.5vw, 2.6rem); font-weight: 600; margin-bottom: 18px; letter-spacing: -0.5px; }
+  footer p.lede { font-size: 16px; color: var(--paper-text-soft); max-width: 460px; margin: 0 auto 32px; }
+  .contact-secondary { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper-text-soft); margin-top: 22px; }
+  .contact-secondary a { color: var(--paper); border-bottom: 1px solid rgba(247,245,240,0.3); padding-bottom: 1px; transition: color .2s var(--ease), border-color .2s var(--ease); }
+  .contact-secondary a:hover { color: var(--coral); border-color: var(--coral); }
+  .foot-note { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,245,240,0.4); margin-top: 48px; }
+
+  @media (max-width: 860px) {
+    header.hero h1 { font-size: 2.6rem; }
+    .do-list { max-width: none; }
+    .hamburger { display: flex; }
+    .navlinks {
+      position: fixed; top: 64px; left: 0; right: 0; bottom: 0; background: var(--ink);
+      flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 0;
+      padding: 20px 32px; transform: translateX(100%); transition: transform .25s var(--ease); z-index: 55;
+    }
+    .navlinks.open { transform: translateX(0); }
+    .navlinks a.navlink { font-size: 15px; padding: 16px 0; width: 100%; border-bottom: 1px solid var(--line-dark); }
+    .navlinks a.btn { margin-top: 20px; }
+    section { padding: 62px 0; }
+    footer h2 { font-size: 1.9rem; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 22px; }
+    .resume-band { flex-direction: column; align-items: flex-start; }
+    .case-ghost { font-size: 4.2rem; opacity: 0.6; }
+    .hero-portrait { max-width: 220px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <span class="brand">KD</span>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navlinks">
+      <a class="navlink" href="#about">About</a>
+      <a class="navlink" href="#work">What I do</a>
+      <a class="navlink" href="#proof">Proof of work</a>
+      <a class="navlink" href="#skills">Skills</a>
+      <a class="btn btn-dark" href="mailto:karendellatan25@gmail.com">Email me</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <span class="status-stamp">Status: open to work</span>
+      <h1>Karen<br>Dellatan</h1>
+      <p class="role-line">Content Operations Specialist &middot; SEO Writing &amp; Editorial QA</p>
+      <p class="tagline">I build and run the systems that keep high-volume content teams accurate, on-brand, and on schedule, and I can personally produce at that volume too.</p>
+      <div class="pipeline-stepper">
+        <span>Draft</span><span class="arrow">&rarr;</span><span>QA</span><span class="arrow">&rarr;</span><span>Review</span><span class="arrow">&rarr;</span><span class="stage-active">Publish</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="#proof">See my work</a>
+        <a class="btn btn-outline" href="#resume">Resume</a>
+      </div>
+    </div>
+    <figure class="hero-portrait">
+      <div class="photo-shell">
+        <img src="photo.jpg" alt="Karen Dellatan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback">KD</div>
+      </div>
+      <figcaption>
+        <span class="fig-tag">Fig. 01</span>
+        <span class="fig-name">Karen Dellatan</span>
+        <span class="fig-loc">Remote / PH</span>
+      </figcaption>
+      <p class="portrait-note"><span class="arrow">&uarr;</span>the person behind the pipeline</p>
+    </figure>
+  </div>
+</header>
+
+<section id="highlights">
+  <div class="wrap">
+    <div class="ledger-row">
+      <div class="ledger-label"><span class="dot dot-coral"></span>Output</div>
+      <div class="ledger-value">2,400+ <span class="unit">articles</span></div>
+    </div>
+    <div class="ledger-row">
+      <div class="ledger-label"><span class="dot dot-cobalt"></span>QA load</div>
+      <div class="ledger-value">450+ <span class="unit">monthly</span></div>
+    </div>
+    <div class="ledger-row">
+      <div class="ledger-label"><span class="dot dot-butter"></span>Team</div>
+      <div class="ledger-value">06&ndash;07 <span class="unit">people</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="proofpoint">
+  <div class="wrap">
+    <p class="proofpoint-tag">Proof point / 01</p>
+    <div class="proofpoint-num">2,400+</div>
+    <p class="proofpoint-caption">AI-assisted SEO articles, personally reviewed, edited, and published across two concurrent roles, five months, a sustained pace of 16 a day.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap section-frame">
+    <span class="section-label">01 / Intake</span>
+    <div>
+      <h2 class="section-title">About</h2>
+      <p class="about-lead">My path here wasn't a straight line, but there's one thread through it: creating structure in high-volume, detail-heavy environments.</p>
+      <div class="about-text">
+        <p>I started as a science teacher, managing instruction, materials, and student records for a full course load. Before moving into content, I supported a community development monitoring and evaluation program for the Provincial Government of Agusan del Sur, helping refine a data-tracking tool and turning raw program data into reports stakeholders could act on.</p>
+        <div class="annotated">
+          <p>Both built the same muscle I now use daily in content operations. For five months, I used AI tools to produce SEO content across two concurrent part-time roles, personally reviewing, editing, and publishing 2,400+ articles combined at a pace of 16 a day. From there, I moved into managing content operations, building the editorial QA system a 6-7 person team relies on to keep a 450+ article a month pipeline error-free and on-brand, and handling technical SEO work including content consolidation and search index management.</p>
+          <p class="note"><span class="arrow">&uarr;</span>usually where I come in</p>
+        </div>
+        <p>I'm currently open to both full-time roles and freelance or project work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap section-frame">
+    <span class="section-label">02 / Capabilities</span>
+    <div>
+      <h2 class="section-title">Six things I'm actually good at</h2>
+      <div class="do-list">
+        <div class="do-item">
+          <div class="do-num">01</div>
+          <div class="do-content">
+            <h3>High-volume SEO content writing</h3>
+            <p>Sustained SEO article production at real scale, without sacrificing accuracy or brand voice.</p>
+          </div>
+        </div>
+        <div class="do-item">
+          <div class="do-num">02</div>
+          <div class="do-content">
+            <h3>Editorial QA &amp; process design</h3>
+            <p>Built and ran the checklist and SOPs a multi-site content team relies on before anything goes live.</p>
+          </div>
+        </div>
+        <div class="do-item">
+          <div class="do-num">03</div>
+          <div class="do-content">
+            <h3>Technical SEO</h3>
+            <p>Content consolidation, redirect strategy, and search index management on a flagship site.</p>
+          </div>
+        </div>
+        <div class="do-item">
+          <div class="do-num">04</div>
+          <div class="do-content">
+            <h3>Team coordination &amp; training</h3>
+            <p>Onboarded and gave ongoing feedback to a remote team, keeping everyone aligned to one standard.</p>
+          </div>
+        </div>
+        <div class="do-item">
+          <div class="do-num">05</div>
+          <div class="do-content">
+            <h3>WordPress publishing &amp; scheduling</h3>
+            <p>End-to-end content operations, from formatting and metadata to editorial calendar scheduling.</p>
+          </div>
+        </div>
+        <div class="do-item">
+          <div class="do-num">06</div>
+          <div class="do-content">
+            <h3>AI-assisted content workflows</h3>
+            <p>Daily, practical use of AI tools for drafting, editing, and QA, integrated into real production work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap section-frame">
+    <span class="section-label on-dark">03 / Output</span>
+    <div>
+      <h2 class="section-title">What I've actually built</h2>
+
+      <div class="case">
+        <span class="case-ghost">01</span>
+        <span class="case-tag">Content operations</span>
+        <h3>Building an editorial QA system for a 450+ article a month pipeline</h3>
+        <div class="case-ledger">
+          <div class="li"><span class="lab"><span class="dot dot-cobalt"></span>Articles / mo</span><span class="val">450+</span></div>
+          <div class="li"><span class="lab"><span class="dot dot-cobalt"></span>Peak volume</span><span class="val">1,000+</span></div>
+          <div class="li"><span class="lab"><span class="dot dot-cobalt"></span>Active sites</span><span class="val">05&ndash;08</span></div>
+          <div class="li"><span class="lab"><span class="dot dot-butter"></span>Team</span><span class="val">06&ndash;07</span></div>
+        </div>
+        <div class="case-block"><div class="k">01 / Situation</div><p>No standardized review process existed before articles went live, risking factual errors, duplicate content, and inconsistent brand voice at scale.</p></div>
+        <div class="case-block"><div class="k">02 / System</div><p>Built and maintained the editorial checklist and SOPs used to review every article. Onboarded new writers and gave individual feedback. Handled technical SEO work including a content consolidation project that merges and redirects overlapping posts, plus controlling index and noindex status across pages.</p></div>
+        <div class="case-block"><div class="k">03 / Impact</div><p>The flagship site sustained 2.3M+ search clicks and 14.3M+ Discover clicks (188M impressions, 7.6% CTR) over a trailing 12-month period, while the team stayed aligned to one editorial standard.</p></div>
+        <span class="verified">&#10003; Verified, not inflated</span>
+        <p class="case-note">Site-wide performance during my tenure, not claimed as individually attributable.</p>
+      </div>
+
+      <div class="case">
+        <span class="case-ghost">02</span>
+        <span class="case-tag">Writing</span>
+        <h3>High-volume SEO content production</h3>
+        <div class="case-ledger">
+          <div class="li"><span class="lab"><span class="dot dot-coral"></span>Published</span><span class="val">2,400+</span></div>
+          <div class="li"><span class="lab"><span class="dot dot-coral"></span>Pace</span><span class="val">16/day</span></div>
+          <div class="li"><span class="lab"><span class="dot dot-cobalt"></span>Duration</span><span class="val">5 mo</span></div>
+        </div>
+        <div class="case-block"><div class="k">01 / Situation</div><p>Two concurrent part-time writing contracts together needed sustained daily SEO content output across multiple sites without sacrificing search visibility or quality.</p></div>
+        <div class="case-block"><div class="k">02 / System</div><p>Used AI tools to generate first-draft SEO-optimized articles, then personally reviewed, edited, and published them daily. Conducted keyword research and optimized headlines and meta descriptions for click-through rate. Curated and scheduled content across MSN and Flipboard for cross-platform distribution.</p></div>
+        <div class="case-block"><div class="k">03 / Impact</div><p>2,400+ published pieces combined over 5 months, leading directly to a promotion into a content operations role.</p></div>
+      </div>
+
+      <div class="case">
+        <span class="case-ghost">03</span>
+        <span class="case-tag">Content strategy</span>
+        <h3>Brand realignment &amp; content repurposing strategy</h3>
+        <div class="case-ledger">
+          <div class="li"><span class="lab"><span class="dot dot-cobalt"></span>Sites realigned</span><span class="val">2</span></div>
+        </div>
+        <div class="case-block"><div class="k">01 / Situation</div><p>A smaller, focused publishing operation needed to reposition its brand content strategy and clean up years of accumulated posts.</p></div>
+        <div class="case-block"><div class="k">02 / System</div><p>Researched and shaped content strategy for the brand realignment initiative. Audited the WordPress backend to identify older posts suited for cleanup and repurposing rather than starting from scratch. Applied technical SEO practices including content consolidation and index management.</p></div>
+        <div class="case-block"><div class="k">03 / Impact</div><p>A clearer content strategy aligned to the brand's repositioning goals, and a more efficient use of existing content.</p></div>
+      </div>
+
+      <div class="case">
+        <span class="case-ghost">04</span>
+        <span class="case-tag">Data &amp; reporting</span>
+        <h3>Program data &amp; reporting support for a community development M&amp;E unit</h3>
+        <div class="case-block"><div class="k">01 / Situation</div><p>A community development program under the Provincial Government of Agusan del Sur needed program data organized into clear reports and visual materials for stakeholders.</p></div>
+        <div class="case-block"><div class="k">02 / System</div><p>Helped refine a Results-Based Monitoring and Evaluation (RBME) data-collection tool. Analyzed and organized program data for reporting. Designed report layouts, presentations, flyers, and data-driven infographics using Adobe Illustrator and Photoshop.</p></div>
+        <div class="case-block"><div class="k">03 / Impact</div><p>Cleaner, more consistent stakeholder reporting and a data-collection process that was easier for the team to use and maintain.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap section-frame">
+    <span class="section-label">04 / Stack</span>
+    <div>
+      <h2 class="section-title">What I bring to the table</h2>
+
+      <div class="skills-group">
+        <h3>Content &amp; editorial</h3>
+        <div class="skill-list">
+          <span>SEO writing</span><span>Article writing</span><span>Editorial QA</span>
+          <span>Content editing</span><span>Proofreading</span><span>Keyword research</span>
+          <span>On-page SEO</span><span>Editorial calendar management</span><span>Content strategy</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <h3>Technical SEO</h3>
+        <div class="skill-list">
+          <span>Content consolidation &amp; pruning</span><span>Redirect strategy</span>
+          <span>Index/noindex management</span><span>Site content auditing</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <h3>Operations &amp; tools</h3>
+        <div class="skill-list">
+          <span>WordPress publishing</span><span>Team coordination &amp; training</span><span>SOP development</span>
+          <span>Google Search Console</span><span>Google Analytics (GA4)</span><span>Notion</span>
+          <span>Airtable</span><span>Adobe Illustrator</span><span>Adobe Photoshop</span>
+          <span>Google Workspace</span><span>AI-assisted content workflows</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resume">
+  <div class="wrap">
+    <div class="resume-band">
+      <div>
+        <h3>Resume</h3>
+        <p>Download my full resume for complete work history and education.</p>
+      </div>
+      <a class="btn btn-solid" href="resume.pdf">Download resume</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk</h2>
+    <p class="lede">I'm currently open to full-time remote roles and freelance or project work in content operations, SEO writing, and editorial QA. If you need someone who can bring structure to a growing content pipeline, I'd like to hear about your project.</p>
+    <a class="btn btn-solid" href="https://calendly.com/karendellatan25/30min" target="_blank" rel="noopener noreferrer">Book a call &#8599;</a>
+    <p class="contact-secondary">Prefer async? <a href="mailto:karendellatan25@gmail.com">Email &#8599;</a> &middot; <a href="https://www.linkedin.com/in/karen-dellatan-3628b5314" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a></p>
+    <p class="foot-note">KD / Agusan del Sur, PH / Remote / Updated Jul 2026</p>
+  </div>
+</footer>
+
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var navPanel = document.querySelector('.navlinks');
+  hamburger.addEventListener('click', function () {
+    navPanel.classList.toggle('open');
+    hamburger.classList.toggle('open');
+  });
+  navPanel.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      navPanel.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
+  });
+
+  var navLinks = document.querySelectorAll('.navlink');
+  var sections = ['about', 'work', 'proof', 'skills'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (l) { l.classList.remove('active'); });
+        var link = document.querySelector('.navlink[href="#' + entry.target.id + '"]');
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(function (s) { obs.observe(s); });
+</script>
+
+</body>
+</html>
